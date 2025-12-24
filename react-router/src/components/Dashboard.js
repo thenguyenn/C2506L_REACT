@@ -1,90 +1,71 @@
 import { useNavigate } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  Container,
+  Box
+} from '@mui/material';
 
 function Dashboard({ email, onLogout }) {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '15px 30px',
+    <Box>
+      <AppBar
+        position="static"
+        sx={{
           background: 'linear-gradient(135deg, #667eea 0%, #605b64ff 100%)',
-          color: 'white',
-          boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+          boxShadow: 2,
         }}
       >
-        <div style={{ display: 'flex', gap: '15px' }}>
-          <button
-            onClick={() => navigate('/dashboard')}
-            style={{
-              padding: '10px 20px',
-              background: 'transparent',
-              color: 'white',
-              border: '1px solid white',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontWeight: '500',
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => navigate('/dashboard')}
+            >
+              Dashboard
+            </Button>
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => navigate('/products')}
+            >
+              Quản lý sản phẩm
+            </Button>
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => navigate('/users')}
+            >
+              Quản lý người dùng
+            </Button>
+          </Box>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: '#ff4757',
+              '&:hover': { backgroundColor: '#e84118' },
             }}
+            onClick={onLogout}
           >
-            Dashboard
-          </button>
-          <button
-            onClick={() => navigate('/products')}
-            style={{
-              padding: '10px 20px',
-              background: 'transparent',
-              color: 'white',
-              border: '1px solid white',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontWeight: '500',
-            }}
-          >
-            Quản lý sản phẩm
-          </button>
-          <button
-            onClick={() => navigate('/users')}
-            style={{
-              padding: '10px 20px',
-              background: 'transparent',
-              color: 'white',
-              border: '1px solid white',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontWeight: '500',
-            }}
-          >
-            Quản lý người dùng
-          </button>
-        </div>
-        <button
-          onClick={onLogout}
-          style={{
-            padding: '10px 20px',
-            background: '#ff4757',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontWeight: '500',
-          }}
-        >
-          Logout
-        </button>
-      </header>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-      <main style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
-        <h1 style={{ color: '#333', marginBottom: '10px' }}>
+      <Container sx={{ mt: 5, maxWidth: '1200px' }}>
+        <Typography variant="h4" gutterBottom sx={{ color: '#333' }}>
           Chào mừng bạn đến Dashboard!
-        </h1>
-        <p style={{ color: '#666', fontSize: '16px' }}>
+        </Typography>
+        <Typography variant="body1" sx={{ color: '#666', fontSize: '16px' }}>
           Email đăng nhập: <strong>{email}</strong>
-        </p>
-      </main>
-    </div>
+        </Typography>
+      </Container>
+    </Box>
   );
 }
 

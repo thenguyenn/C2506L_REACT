@@ -1,5 +1,18 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  Container,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Box
+} from '@mui/material';
 
 function Products({ onLogout }) {
   const navigate = useNavigate();
@@ -13,153 +26,81 @@ function Products({ onLogout }) {
   ];
 
   return (
-    <div>
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '15px 30px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          color: 'white',
-          boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-        }}
-      >
-        <div style={{ display: 'flex', gap: '15px' }}>
-          <button
-            onClick={() => navigate('/dashboard')}
-            style={{
-              padding: '10px 20px',
-              background: 'transparent',
-              color: 'white',
-              border: '1px solid white',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontWeight: '500',
-            }}
+    <Box>
+      <AppBar position="static" sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button variant="outlined" color="inherit" onClick={() => navigate('/dashboard')}>
+              Dashboard
+            </Button>
+            <Button variant="outlined" color="inherit" onClick={() => navigate('/products')}>
+              Quản lý sản phẩm
+            </Button>
+            <Button variant="outlined" color="inherit" onClick={() => navigate('/users')}>
+              Quản lý người dùng
+            </Button>
+          </Box>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: '#ff4757', '&:hover': { backgroundColor: '#e84118' } }}
+            onClick={onLogout}
           >
-            Dashboard
-          </button>
-          <button
-            onClick={() => navigate('/products')}
-            style={{
-              padding: '10px 20px',
-              background: 'transparent',
-              color: 'white',
-              border: '1px solid white',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontWeight: '500',
-            }}
-          >
-            Quản lý sản phẩm
-          </button>
-          <button
-            onClick={() => navigate('/users')}
-            style={{
-              padding: '10px 20px',
-              background: 'transparent',
-              color: 'white',
-              border: '1px solid white',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontWeight: '500',
-            }}
-          >
-            Quản lý người dùng
-          </button>
-        </div>
-        <button
-          onClick={onLogout}
-          style={{
-            padding: '10px 20px',
-            background: '#ff4757',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontWeight: '500',
-          }}
-        >
-          Logout
-        </button>
-      </header>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-      <main style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
-        <h1 style={{ color: '#333', marginBottom: '30px' }}>Quản lý Sản Phẩm</h1>
-        <table
-          style={{
-            width: '100%',
-            borderCollapse: 'collapse',
-            background: 'white',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            borderRadius: '10px',
-            overflow: 'hidden',
-          }}
-        >
-          <thead>
-            <tr style={{ background: '#667eea', color: 'white' }}>
-              <th style={{ padding: '15px', textAlign: 'left' }}>ID</th>
-              <th style={{ padding: '15px', textAlign: 'left' }}>Tên Sản Phẩm</th>
-              <th style={{ padding: '15px', textAlign: 'left' }}>Giá</th>
-              <th style={{ padding: '15px', textAlign: 'left' }}>Tồn Kho</th>
-              <th style={{ padding: '15px', textAlign: 'left' }}>Hành Động</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product, index) => (
-              <tr
-                key={product.id}
-                style={{
-                  borderBottom: '1px solid #eee',
-                  background: index % 2 === 0 ? '#f9f9f9' : 'white',
-                }}
-              >
-                <td style={{ padding: '15px' }}>{product.id}</td>
-                <td style={{ padding: '15px' }}>{product.name}</td>
-                <td
-                  style={{
-                    padding: '15px',
-                    color: '#667eea',
-                    fontWeight: 'bold',
-                  }}
+      <Container sx={{ mt: 5 }}>
+        <Typography variant="h4" gutterBottom sx={{ color: '#333' }}>
+          Quản lý Sản Phẩm
+        </Typography>
+
+        <Paper elevation={3} sx={{ borderRadius: 2, overflow: 'hidden' }}>
+          <Table>
+            <TableHead>
+              <TableRow sx={{ backgroundColor: '#667eea' }}>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>ID</TableCell>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Tên Sản Phẩm</TableCell>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Giá</TableCell>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Tồn Kho</TableCell>
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Hành Động</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((product, index) => (
+                <TableRow
+                  key={product.id}
+                  sx={{ backgroundColor: index % 2 === 0 ? '#f9f9f9' : 'white' }}
                 >
-                  {product.price}
-                </td>
-                <td style={{ padding: '15px' }}>{product.stock}</td>
-                <td style={{ padding: '15px' }}>
-                  <button
-                    style={{
-                      padding: '6px 12px',
-                      background: '#3498db',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      marginRight: '5px',
-                    }}
-                  >
-                    Sửa
-                  </button>
-                  <button
-                    style={{
-                      padding: '6px 12px',
-                      background: '#e74c3c',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Xóa
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </main>
-    </div>
+                  <TableCell>{product.id}</TableCell>
+                  <TableCell>{product.name}</TableCell>
+                  <TableCell sx={{ color: '#667eea', fontWeight: 'bold' }}>
+                    {product.price}
+                  </TableCell>
+                  <TableCell>{product.stock}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{ backgroundColor: '#3498db', mr: 1, '&:hover': { backgroundColor: '#2980b9' } }}
+                    >
+                      Sửa
+                    </Button>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{ backgroundColor: '#e74c3c', '&:hover': { backgroundColor: '#c0392b' } }}
+                    >
+                      Xóa
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
 
