@@ -13,6 +13,8 @@ import {
   TableBody,
   Box
 } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Products({ onLogout }) {
   const navigate = useNavigate();
@@ -82,6 +84,7 @@ function Products({ onLogout }) {
                     <Button
                       variant="contained"
                       size="small"
+                      startIcon={<EditIcon />}  
                       sx={{ backgroundColor: '#3498db', mr: 1, '&:hover': { backgroundColor: '#2980b9' } }}
                     >
                       Sửa
@@ -89,6 +92,7 @@ function Products({ onLogout }) {
                     <Button
                       variant="contained"
                       size="small"
+                      startIcon={<DeleteIcon />}
                       sx={{ backgroundColor: '#e74c3c', '&:hover': { backgroundColor: '#c0392b' } }}
                     >
                       Xóa
